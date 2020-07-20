@@ -1,6 +1,6 @@
 #define BUF_SIZE 10
 #define END = 0
-char data_buf[BUF_SIZE];
+char data_buf[BUF_SIZE]={};
 int8_t buf_counter=0;
 
 void print_input_data(char data_buf){
@@ -35,8 +35,8 @@ void loop() {
     if(buf_counter>BUF_SIZE-1){
       buf_counter=0;
     } 
-    Serial.write(data_buf, BUF_SIZE);
-    Serial.println();
+    Serial.write(data_buf,BUF_SIZE);
+    // Serial.println();
   }
 //  ヘッダ検出部分
   if(check_packet_end(data_buf)){
