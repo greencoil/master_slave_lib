@@ -9,5 +9,5 @@ if __name__ == '__main__':
             ser.write(0x40)
             print(ser.read())
     except KeyboardInterrupt:
-        print('interrupted!')
+        print('interrupted!') 
         exit()

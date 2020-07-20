@@ -1,15 +1,33 @@
 #define BUF_SIZE 10
-
+#define END = 0
 char data_buf[BUF_SIZE];
 int8_t buf_counter=0;
+
+void print_input_data(char data_buf){
+  ;
+}
 
 void setup(){
   Serial.begin(115200);
   while (!Serial);
 }
 
+bool check_packet_end(char data_buf[]){
+  ;
+}
+
+bool check_CRC(char data_buf[]){
+  ;
+}
+
+bool check_targetID(char data_buf[]){
+  ;
+}
+void data_extraction(char data_buf[]){
+  ;
+}
 void loop() {
-  // put your main code here, to run repeatedly
+  
   //データ格納部分
   if(Serial.available()){
     data_buf[buf_counter]=Serial.read();
@@ -17,9 +35,17 @@ void loop() {
     if(buf_counter>BUF_SIZE-1){
       buf_counter=0;
     } 
-    Serial.write(data_buf, sizeof(data_buf));
+    Serial.write(data_buf, BUF_SIZE);
+    Serial.println();
   }
-  Serial.write(0x65);
-  Serial.write('\n');
-  delay(100);
+//  ヘッダ検出部分
+  if(check_packet_end(data_buf)){
+    if(check_CRC){
+      if(check_targetID(data_buf)){
+        data_extraction(data_buf);
+      }
+    }
+  }
+//  Serial.println(data_buf);
+  delay(1);
 }
