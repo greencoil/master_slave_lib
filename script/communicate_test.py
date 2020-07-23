@@ -18,9 +18,11 @@ if __name__ == '__main__':
         i = 0
         while True:
             # x = [0xFF]
+            if i >= 255:
+                i = 0
             x =  struct.pack( "B", i )
             send(x)
-            time.sleep(1)
+            time.sleep(0.01)
             res=[]
             while(ser.in_waiting > 0):
                 recv_data = ser.read()
@@ -28,7 +30,6 @@ if __name__ == '__main__':
                 a = struct.unpack_from("B",recv_data ,0)
                 res.append(a)
             print(res)
-            time.sleep(1)
             i+=1
     except KeyboardInterrupt:
         print('interrupted!') 

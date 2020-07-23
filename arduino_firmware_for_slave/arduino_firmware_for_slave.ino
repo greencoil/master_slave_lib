@@ -1,4 +1,4 @@
-#define BUF_SIZE 10
+#define BUF_SIZE 50
 #define END = 0
 char data_buf[BUF_SIZE]={};
 int8_t buf_counter=0;
@@ -26,6 +26,10 @@ bool check_targetID(char data_buf[]){
 void data_extraction(char data_buf[]){
   ;
 }
+void buf_flush(){
+  ;
+}
+
 void loop() {
   
   //データ格納部分
@@ -43,6 +47,7 @@ void loop() {
     if(check_CRC){
       if(check_targetID(data_buf)){
         data_extraction(data_buf);
+        Buf_flush(data_buf);
       }
     }
   }
