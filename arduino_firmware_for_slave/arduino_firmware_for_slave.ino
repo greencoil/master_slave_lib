@@ -30,7 +30,14 @@ void data_extraction(char data_buf[]){
 void buf_flush(char data_buf[]){
   ;
 }
-
+void find_header(char data_buf[]){
+  int idx;
+  for (idx = 0; idx < (BUF_SIZE - 3); idx++){
+    if ((rxpacket[idx] == 0xFF) && (rxpacket[idx+1] == 0xFF) && (rxpacket[idx+2] == 0xFD) && (rxpacket[idx+3] != 0xFD))
+    return True;
+  }
+  return False
+}
 void loop() {
   //データ格納部分
   if(Serial.available()){
@@ -43,18 +50,24 @@ void loop() {
     // Serial.println();
   }
 //  ヘッダ検出部分
-  if(check_packet_end(data_buf)){
-    if(check_CRC){
-      if(check_targetID(data_buf)){
-        data_extraction(data_buf);
-        buf_flush(data_buf);
+    if(find_header(data_buf)){
+      Serial1.println("find header");
+      if(check_targetID(Serial.read)==ID){
+        // 本格的読み込み
+        // 最後まで読んだらチェックサム照合
+        if(check_packet_end(data_buf)){
+          if(check_CRC){
+            // 問題なければ値代入
+            data_extraction();
+            buf_flush(data_buf);
+          }
+        }
       }
     }
-  }
-  for(int i=0;i<buf_counter;i++){
-    byte buf_tmp=data_buf[i];
-    Serial1.print(buf_tmp,HEX);
-  }
+    for(int i=0;i<buf_counter;i++){
+      byte buf_tmp=data_buf[i];
+      Serial1.print(buf_tmp,HEX);
+    }
     delay(1);
     Serial1.println();
 }
