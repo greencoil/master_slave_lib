@@ -1,5 +1,6 @@
 #define BUF_SIZE 50
-#define END = 0
+#define END 0
+#define ID 1
 char data_buf[BUF_SIZE]={};
 int8_t buf_counter=0;
 
@@ -30,13 +31,13 @@ void data_extraction(char data_buf[]){
 void buf_flush(char data_buf[]){
   ;
 }
-void find_header(char data_buf[]){
+int find_header(char rxpacket[]){    
   int idx;
-  for (idx = 0; idx < (BUF_SIZE - 3); idx++){
+  for (idx = 0; idx < (BUF_SIZE - 3); idx++){ 
     if ((rxpacket[idx] == 0xFF) && (rxpacket[idx+1] == 0xFF) && (rxpacket[idx+2] == 0xFD) && (rxpacket[idx+3] != 0xFD))
-    return True;
+    return true;
   }
-  return False
+  return false;
 }
 void loop() {
   //データ格納部分
@@ -52,13 +53,13 @@ void loop() {
 //  ヘッダ検出部分
     if(find_header(data_buf)){
       Serial1.println("find header");
-      if(check_targetID(Serial.read)==ID){
+      if(check_targetID(data_buf){
         // 本格的読み込み
         // 最後まで読んだらチェックサム照合
         if(check_packet_end(data_buf)){
           if(check_CRC){
             // 問題なければ値代入
-            data_extraction();
+            data_extraction(data_buf);
             buf_flush(data_buf);
           }
         }
