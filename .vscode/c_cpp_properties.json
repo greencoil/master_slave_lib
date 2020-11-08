@@ -7,8 +7,8 @@
                 "C:\\Program Files (x86)\\Arduino\\tools\\**",
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\**",
                 "C:/Program Files (x86)/Arduino/hardware/tools/avr/avr/include",
-                "/home/yamaguchi/apps/arduino-1.8.13/hardware/arduino/avr/**",
-                "/home/yamaguchi/apps/arduino-1.8.13/tools/**"
+                "/home/yamaguchi/arduino-1.8.8/hardware/arduino/avr/**",
+                "/home/yamaguchi/arduino-1.8.8/tools/**"
             ],
             "browse": {
                 "path": [
@@ -20,9 +20,20 @@
             },
             "forcedInclude": [
                 "C:\\Program Files (x86)\\Arduino\\hardware\\arduino\\avr\\cores\\arduino\\Arduino.h",
-                "/home/yamaguchi/apps/arduino-1.8.13/hardware/arduino/avr/cores/arduino/Arduino.h"
+                "/home/yamaguchi/arduino-1.8.8/hardware/arduino/avr/cores/arduino/Arduino.h"
             ],
             "intelliSenseMode": "msvc-x64"
+        },
+        {
+            "name": "linux",
+            "includePath": [
+                "${workspaceFolder}/**"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "gnu11",
+            "cppStandard": "gnu++14",
+            "intelliSenseMode": "gcc-x64"
         }
     ],
     "version": 4
